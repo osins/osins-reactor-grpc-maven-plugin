@@ -1,0 +1,114 @@
+syntax = "proto3";
+
+package com.example.grpc.proto;
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "UserAuthorityProto";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+
+// User Authority Service Definition
+service UserAuthorityService {
+  rpc LoadUserById(LoadUserByIdRequest) returns (UserResponse);
+  rpc LoadUserByUsername(LoadUserByUsernameRequest) returns (UserResponse);
+  rpc GetUserPermissions(GetUserPermissionsRequest) returns (PermissionsResponse);
+  rpc HasPermission(HasPermissionRequest) returns (HasPermissionResponse);
+  rpc GetUserRoles(GetUserRolesRequest) returns (RolesResponse);
+  rpc HasRole(HasRoleRequest) returns (HasRoleResponse);
+  rpc LoadUsersByIds(LoadUsersByIdsRequest) returns (stream UserResponse);
+
+  // 新增：创建用户
+  rpc CreateUser(CreateUserRequest) returns (UserResponse);
+
+  // 新增：更新用户信息
+  rpc UpdateUser(UpdateUserRequest) returns (UserResponse);
+
+  // 🔑 新增：修改用户密码
+  rpc changePasswordByUsername(ChangePasswordByUsernameRequest) returns (ChangePasswordByUsernameResponse);
+}
+
+// Request Messages
+message LoadUserByIdRequest { int64 user_id = 1; }
+message LoadUserByUsernameRequest { string username = 1; }
+message GetUserPermissionsRequest { int64 user_id = 1; }
+message HasPermissionRequest { int64 user_id = 1; string permission_code = 2; }
+message GetUserRolesRequest { int64 user_id = 1; }
+message HasRoleRequest { int64 user_id = 1; string role_code = 2; }
+message LoadUsersByIdsRequest { repeated int64 user_ids = 1; }
+
+// 新增：创建/更新用户请求
+message CreateUserRequest {
+  string username = 1;
+  string password = 2;  // 用于创建/更新
+}
+
+message UpdateUserRequest { int64 user_id = 1; User user = 2; }
+
+// 🔑 修改密码请求
+message ChangePasswordByUsernameRequest {
+  string username = 1;       // 手机号
+  string new_password = 2; // 新密码
+}
+
+message ChangePasswordByUsernameResponse {
+  bool success = 1;
+  string error = 2;
+  int32 changes = 3;
+}
+
+// Response Messages
+message UserResponse {
+  oneof result {
+    User user = 1;
+    string error = 2;
+  }
+}
+
+message PermissionsResponse {
+  oneof result {
+    PermissionsList permissions = 1;
+    string error = 2;
+  }
+}
+
+message RolesResponse {
+  oneof result {
+    RolesList roles = 1;
+    string error = 2;
+  }
+}
+
+message HasPermissionResponse { bool has_permission = 1; }
+message HasRoleResponse { bool has_role = 1; }
+
+// List wrapper messages
+message PermissionsList { repeated Permission permissions = 1; }
+message RolesList { repeated Role roles = 1; }
+
+// Data Transfer Objects
+message User {
+  int64 id = 1;
+  string username = 2;
+  string password = 3;  // 用于创建/更新
+  bool enabled = 5;
+  repeated Role roles = 6;
+
+  // 新增时间字段
+  google.protobuf.Timestamp createdAt = 7;
+  google.protobuf.Timestamp updatedAt = 8;
+}
+
+message Role {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+  repeated Permission permissions = 4;
+}
+
+message Permission {
+  int64 id = 1;
+  string code = 2;
+  string name = 3;
+}

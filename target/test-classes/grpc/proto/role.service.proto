@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "RoleRpc";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "commons.proto";
+
+// =====================================
+// 角色服务
+// =====================================
+service SysRoleService {
+  rpc FindAll(google.protobuf.Empty) returns (SysRoleList);
+  rpc FindById(FindByIdRequest) returns (SysRoleResponse);
+  rpc CreateRole(CreateRoleRequest) returns (SysRoleResponse);
+  rpc DeleteRole(DeleteRoleRequest) returns (DeleteResponse);
+}
+
+message SysRole {
+  int64 id = 1;
+  string name = 2;
+  string description = 3;
+
+  // 新增时间字段
+  google.protobuf.Timestamp createdAt = 7;
+  google.protobuf.Timestamp updatedAt = 8;
+}
+
+message SysRoleList { repeated SysRole roles = 1; }
+message SysRoleResponse {
+  string error = 1;
+  SysRole role = 2;
+}
+
+message CreateRoleRequest { SysRole role = 1; }

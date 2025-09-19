@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+option java_outer_classname = "PermissionRpc";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "commons.proto";
+
+// =====================================
+// 权限服务
+// =====================================
+service SysPermissionService {
+  rpc FindAll(google.protobuf.Empty) returns (SysPermissionList);
+  rpc FindById(FindByIdRequest) returns (SysPermissionResponse);
+  rpc CreatePermission(CreatePermissionRequest) returns (SysPermissionResponse);
+  rpc DeletePermission(DeletePermissionRequest) returns (DeleteResponse);
+}
+
+message SysPermission {
+  int64 id = 1;
+  string code = 2;
+  string description = 3;
+
+  // 新增时间字段
+  google.protobuf.Timestamp createdAt = 7;
+  google.protobuf.Timestamp updatedAt = 8;
+}
+
+message SysPermissionList { repeated SysPermission permissions = 1; }
+message SysPermissionResponse { SysPermission permission = 1; string error = 2; }
+message CreatePermissionRequest { SysPermission permission = 1; }
+message DeletePermissionRequest { int64 id = 1; }

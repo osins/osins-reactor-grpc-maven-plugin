@@ -1,0 +1,11 @@
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.ReactiveCodeGenTest - generate spring webflux config, source: /home/richard/codes/maven-osins-reactor-grpc-plugin/target/generated-sources/protobuf/grpc-java/com/example/grpc/SysPermissionServiceGrpc.java
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: bindService
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: getCreatePermissionMethod
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: getDeletePermissionMethod
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: getFindAllMethod
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: getFindByIdMethod
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: getServiceDescriptor
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: newBlockingStub
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: newBlockingV2Stub
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: newFutureStub
+2025-09-09 16:31:41 [main] INFO io.osins.grpc.reactor.plugin.maven.service.impl.ReactiveCodeServiceImpl - 添加Stub方法: newStub

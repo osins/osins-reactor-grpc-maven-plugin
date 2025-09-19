@@ -1,0 +1,11 @@
+io/osins/grpc/reactor/plugin/maven/service/StubArtifactDescriptorReader.class
+io/osins/grpc/reactor/plugin/maven/service/StubVersionRangeResolver.class
+io/osins/grpc/reactor/plugin/maven/ProtoGenTest.class
+io/osins/grpc/reactor/plugin/maven/service/StubSyncContextFactory.class
+io/osins/grpc/reactor/plugin/maven/JavaServiceTest.class
+io/osins/grpc/reactor/plugin/maven/utils/ProtoTestUtils.class
+io/osins/grpc/reactor/plugin/maven/SpoonTest.class
+io/osins/grpc/reactor/plugin/maven/service/StubSyncContextFactory$1.class
+io/osins/grpc/reactor/plugin/maven/ReactiveCodeGenTest.class
+io/osins/grpc/reactor/plugin/maven/handler/ArtifactHandlerMock.class
+io/osins/grpc/reactor/plugin/maven/service/StubVersionResolver.class

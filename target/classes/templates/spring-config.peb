@@ -1,0 +1,65 @@
+package {{ configPackage }};
+
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+
+{% for protoFile in protoFiles %}
+{% for service in protoFile.services %}
+import {{ service.packageName }}.{{ service.serviceName }}Grpc;
+import {{ service.packageName }}.client.{{ service.serviceName }}Client;
+import {{ service.packageName }}.client.{{ service.serviceName }}StubWrapper;
+{% endfor %}
+{% endfor %}
+
+/**
+ * gRPC 客户端自动配置类
+ * 自动生成 - 请勿手动修改
+ */
+@Configuration
+public class {{ configClassName }} {
+
+    @Value("${grpc.client.host:{{ defaultHost }}}")
+    private String grpcHost;
+
+    @Value("${grpc.client.port:{{ defaultPort }}}")
+    private int grpcPort;
+
+    @Bean
+    @Primary
+    public ManagedChannel grpcChannel() {
+        return ManagedChannelBuilder.forAddress(grpcHost, grpcPort)
+                .usePlaintext()
+                .build();
+    }
+
+{% for protoFile in protoFiles %}
+{% for service in protoFile.services %}
+    @Bean
+    public {{ service.serviceName }}Grpc.{{ service.serviceName }}BlockingStub {{ service.blockingBeanName }}BlockingStub(ManagedChannel channel) {
+        return {{ service.serviceName }}Grpc.newBlockingStub(channel);
+    }
+
+    @Bean
+    public {{ service.serviceName }}Grpc.{{ service.serviceName }}Stub {{ service.beanName }}Stub(ManagedChannel channel) {
+        return {{ service.serviceName }}Grpc.newStub(channel);
+    }
+
+    @Bean
+    public {{ service.serviceName }}Client {{ service.beanName }}(
+            {{ service.serviceName }}Grpc.{{ service.serviceName }}BlockingStub blockingStub,
+            {{ service.serviceName }}Grpc.{{ service.serviceName }}Stub asyncStub) {
+        return new {{ service.serviceName }}Client(blockingStub, asyncStub);
+    }
+
+    @Bean
+    public {{ service.serviceName }}StubWrapper {{ service.beanName }}Wrapper({{ service.serviceName }}Client client) {
+        return new {{ service.serviceName }}StubWrapper(client);
+    }
+
+{% endfor %}
+{% endfor %}
+}

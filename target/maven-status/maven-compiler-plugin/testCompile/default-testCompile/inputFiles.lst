@@ -1,0 +1,10 @@
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/JavaServiceTest.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/ProtoGenTest.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/ReactiveCodeGenTest.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/SpoonTest.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/handler/ArtifactHandlerMock.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/service/StubArtifactDescriptorReader.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/service/StubSyncContextFactory.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/service/StubVersionRangeResolver.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/service/StubVersionResolver.java
+/home/richard/codes/maven-osins-reactor-grpc-plugin/src/test/java/io/osins/grpc/reactor/plugin/maven/utils/ProtoTestUtils.java
