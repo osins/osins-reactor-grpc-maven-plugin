@@ -1,0 +1,99 @@
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!src/
+**/target/
+
+# IDE
+.classpath
+.project
+.settings/
+.idea/
+*.swp
+*.swo
+*.swn
+*~
+
+# Eclipse
+.metadata
+bin/
+tmp/
+*.tmp
+*.bak
+*.log
+*.pyc
+*.gz
+
+# IntelliJ IDEA
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# VS Code
+.vscode/
+
+# Operating System
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+
+# Temp Files
+*.tmp
+*.temp
+*.bak
+
+# Environment specific
+.env
+.env.local
+.env.dev
+.env.test
+.env.prod
+
+# System Files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+Icon?
+.VolumeIcon.icns
+.Suspects
+*.swp
+*.swo
+*~
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.zip
+*.tar
+*.tar.gz
+
+# Test Results
+test-results/
+*.jfr
+
+# CI
+.github/
+.gitlab/
+
+# Maven Wrapper
+!.mvn/wrapper/maven-wrapper.properties
+!.mvn/wrapper/maven-wrapper.jar
