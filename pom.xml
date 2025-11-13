@@ -6,7 +6,7 @@
 
     <groupId>io.osins.grpc</groupId>
     <artifactId>osins-reactor-grpc-maven-plugin</artifactId>
-    <version>1.74.0.0</version>
+    <version>1.76.0.0</version>
     <packaging>maven-plugin</packaging>
 
     <name>osins-reactor-grpc-maven-plugin</name>
@@ -19,7 +19,8 @@
         <maven.compiler.target>21</maven.compiler.target>
         <maven.resolver.version>1.9.23</maven.resolver.version>
         <maven.version>3.9.10</maven.version>
-        <grpc.version>1.74.0</grpc.version>
+        <grpc.version>1.76.0</grpc.version>
+        <protobuf.version>4.33.0</protobuf.version>
         <aether.version>1.1.0</aether.version>
 
         <surefire.redirectTestOutputToFile>true</surefire.redirectTestOutputToFile>
@@ -31,8 +32,6 @@
         <bouncycastleVersion>1.81</bouncycastleVersion>
         <jettyVersion>10.0.25</jettyVersion>
         <bnd.instructions.additions />
-
-        <protobuf.version>4.31.1</protobuf.version>
     </properties>
 
     <dependencies>
@@ -43,32 +42,32 @@
             <version>0.0.1</version>
         </dependency>
 
-        <!-- Aether SPI -->
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-spi</artifactId>
-            <version>${aether.version}</version>
-            <scope>compile</scope>
-        </dependency>
+<!--        &lt;!&ndash; Aether SPI &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.eclipse.aether</groupId>-->
+<!--            <artifactId>aether-spi</artifactId>-->
+<!--            <version>${aether.version}</version>-->
+<!--            <scope>compile</scope>-->
+<!--        </dependency>-->
 
-        <!-- Aether impl -->
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-impl</artifactId>
-            <version>${aether.version}</version>
-        </dependency>
+<!--        &lt;!&ndash; Aether impl &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.eclipse.aether</groupId>-->
+<!--            <artifactId>aether-impl</artifactId>-->
+<!--            <version>${aether.version}</version>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.eclipse.aether</groupId>
-            <artifactId>aether-transport-http</artifactId>
-            <version>${aether.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>slf4j-api</artifactId>
-                    <groupId>org.slf4j</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.eclipse.aether</groupId>-->
+<!--            <artifactId>aether-transport-http</artifactId>-->
+<!--            <version>${aether.version}</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>slf4j-api</artifactId>-->
+<!--                    <groupId>org.slf4j</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>org.apache.maven.resolver</groupId>
@@ -272,12 +271,14 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>2.20.0</version>
-        </dependency><dependency>
-        <groupId>com.google.errorprone</groupId>
-        <artifactId>error_prone_annotations</artifactId>
-        <version>2.36.0</version>
-        <scope>compile</scope>
-    </dependency>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.errorprone</groupId>
+            <artifactId>error_prone_annotations</artifactId>
+            <version>2.36.0</version>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- protobuf插件 -->
         <dependency>
