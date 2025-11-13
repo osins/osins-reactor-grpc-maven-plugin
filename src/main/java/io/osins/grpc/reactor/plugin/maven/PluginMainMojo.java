@@ -53,6 +53,9 @@ public class PluginMainMojo extends AbstractMojo {
     @Parameter(property = "outClient", defaultValue = "/generated-sources/protobuf/client")
     private String outClient;
 
+    @Parameter(property = "utilPath", defaultValue = "/generated-sources/protobuf/utils")
+    private String utilPath;
+
     @Parameter(defaultValue = "${session}")
     private MavenSession session;
 
@@ -88,6 +91,7 @@ public class PluginMainMojo extends AbstractMojo {
         var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient));
 
         log.info("Starting gRPC Spring Bean generation...");
+        log.info("utilPath: {}", utilPath);
 
         try {
             // 解析 Proto 文件
