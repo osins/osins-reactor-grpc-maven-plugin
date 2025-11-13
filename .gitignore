@@ -8,11 +8,12 @@ target/
 .classpath
 .project
 .settings/
+
+# IntelliJ IDEA
 .idea/
-*.swp
-*.swo
-*.swn
-*~
+*.iml
+*.ipr
+*.iws
 
 # Eclipse
 .metadata
@@ -23,12 +24,6 @@ tmp/
 *.log
 *.pyc
 *.gz
-
-# IntelliJ IDEA
-*.iml
-*.ipr
-*.iws
-.idea/
 
 # NetBeans
 nbproject/private/
