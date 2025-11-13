@@ -22,6 +22,10 @@ public class JavaServiceImpl implements JavaService {
     @Named("outClient")
     private String outClient;
 
+    @Inject
+    @Named("utilPath")
+    private String utilPath;
+
     @Override
     public Launcher loadJavaCodes(String output) throws IOException {
         var path = Paths.get(project.getBuild().getDirectory(), "/generated-sources", output);
@@ -45,11 +49,10 @@ public class JavaServiceImpl implements JavaService {
         if(!outPath.toFile().exists())
             Files.createDirectories(outPath);
 
-        var basePath = "/home/richard/codes/matrix/matrix-shared/matrix-shared-grpc/matrix-shared-grpc-base/src/main/java/club/hm/matrix/shared/grpc/base/utils";
         var packages = Stream.concat(project.getArtifacts().stream()
                                 .filter(artifact -> artifact.getFile().exists())
                                 .map(artifact -> artifact.getFile().getAbsolutePath()),
-                        Stream.of(grpcJavaPath, javaPath, basePath, outClient))
+                        Stream.of(grpcJavaPath, javaPath, utilPath, outClient))
                 .toList();
 
         var launcher = new Launcher();

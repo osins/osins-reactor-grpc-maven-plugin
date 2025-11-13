@@ -53,7 +53,7 @@ public class PluginMainMojo extends AbstractMojo {
     @Parameter(property = "outClient", defaultValue = "/generated-sources/protobuf/client")
     private String outClient;
 
-    @Parameter(property = "utilPath", defaultValue = "/generated-sources/protobuf/utils")
+    @Parameter(property = "utilPath", defaultValue = "/home/richard/codes/matrix/matrix-shared/matrix-shared-grpc/matrix-shared-grpc-base/src/main/java/club/hm/matrix/shared/grpc/base/utils")
     private String utilPath;
 
     @Parameter(defaultValue = "${session}")
@@ -88,7 +88,7 @@ public class PluginMainMojo extends AbstractMojo {
                 new ProtoModule(threads,
                         project,
                         session, repoSession, repoSystem));
-        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient));
+        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient, ""));
 
         log.info("Starting gRPC Spring Bean generation...");
         log.info("utilPath: {}", utilPath);

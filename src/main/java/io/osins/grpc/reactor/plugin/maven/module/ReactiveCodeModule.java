@@ -21,6 +21,7 @@ public class ReactiveCodeModule extends AbstractModule {
     private final String packageName;
     private final String channelName;
     private final String outClient;
+    private final String utilPath;
 
     @Override
     protected void configure() {
@@ -57,5 +58,11 @@ public class ReactiveCodeModule extends AbstractModule {
                 .toInstance(outClient);
 
         log.info("ReactiveCodeModule configure, out client: {}", outClient);
+
+        bind(String.class)
+                .annotatedWith(Names.named("utilPath"))
+                .toInstance(utilPath);
+
+        log.info("ReactiveCodeModule configure, util path: {}", utilPath);
     }
 }
