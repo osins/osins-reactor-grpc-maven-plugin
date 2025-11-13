@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -49,16 +50,40 @@ public class JavaServiceImpl implements JavaService {
         if(!outPath.toFile().exists())
             Files.createDirectories(outPath);
 
-        var packages = Stream.concat(project.getArtifacts().stream()
-                                .filter(artifact -> artifact.getFile().exists())
-                                .map(artifact -> artifact.getFile().getAbsolutePath()),
-                        Stream.of(grpcJavaPath, javaPath, utilPath, outClient))
-                .toList();
+        // 将项目依赖、生成的代码路径和protobuf相关依赖都添加到类路径
+        var protobufArtifacts = project.getArtifacts().stream()
+                .filter(artifact -> 
+                    artifact.getGroupId().contains("protobuf") || 
+                    artifact.getGroupId().contains("grpc") ||
+                    artifact.getArtifactId().contains("protobuf") ||
+                    artifact.getArtifactId().contains("grpc")
+                )
+                .map(artifact -> artifact.getFile().getAbsolutePath());
+
+        var allArtifacts = project.getArtifacts().stream()
+                .filter(artifact -> artifact.getFile().exists())
+                .map(artifact -> artifact.getFile().getAbsolutePath());
+
+        var packages = Stream.concat(
+                Stream.concat(allArtifacts, protobufArtifacts),
+                Stream.of(grpcJavaPath, javaPath, utilPath, outClient))
+                .distinct() // 去重
+                .collect(Collectors.toList());
 
         var launcher = new Launcher();
         var env = launcher.getEnvironment();
         env.setNoClasspath(false); // 避免类路径冲突
-        env.setComplianceLevel(Integer.parseInt(project.getProperties().getProperty("maven.compiler.source")));
+        // 设置源码兼容级别，如果项目属性中没有则默认为21
+        String sourceVersion = project.getProperties().getProperty("maven.compiler.source");
+        int complianceLevel = 21; // 默认为21
+        if (sourceVersion != null) {
+            try {
+                complianceLevel = Integer.parseInt(sourceVersion);
+            } catch (NumberFormatException e) {
+                log.warn("Could not parse source version: {}, using default 21", sourceVersion);
+            }
+        }
+        env.setComplianceLevel(complianceLevel);
         env.setAutoImports(true);  // 自动导入
         env.setCommentEnabled(true);
         env.setSourceClasspath(packages.toArray(String[]::new));
