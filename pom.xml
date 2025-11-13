@@ -419,17 +419,4 @@
             </plugin>
         </plugins>
     </build>
-
-    <distributionManagement>
-        <repository>
-            <id>project-releases</id>
-            <name>Releases Repository</name>
-            <url>http://s2.homemart.club:5200/repository/io.osins/</url>
-        </repository>
-        <snapshotRepository>
-            <id>project-snapshots</id>
-            <name>Snapshots Repository</name>
-            <url>http://s2.homemart.club:5200/repository/io.osins/</url>
-        </snapshotRepository>
-    </distributionManagement>
 </project>

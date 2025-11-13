@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="maven-osins-reactor-grpc-plugin" />
+        <module name="osins-reactor-grpc-maven-plugin" />
       </profile>
     </annotationProcessing>
   </component>
