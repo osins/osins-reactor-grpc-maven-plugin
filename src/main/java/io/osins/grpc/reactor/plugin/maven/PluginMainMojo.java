@@ -41,6 +41,9 @@ public class PluginMainMojo extends AbstractMojo {
     @Parameter(property = "packageName", defaultValue = "com.example", required = true)
     private String packageName;
 
+    @Parameter(property = "resolve", defaultValue = "groupId:artifactId:classifier:extension:version")
+    private String resolve;
+
     @Parameter(property = "source", defaultValue = "/src/test/resources/grpc/proto")
     private String source;
 
@@ -88,7 +91,7 @@ public class PluginMainMojo extends AbstractMojo {
                 new ProtoModule(threads,
                         project,
                         session, repoSession, repoSystem));
-        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient, ""));
+        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient, utilPath, resolve));
 
         log.info("Starting gRPC Spring Bean generation...");
         log.info("utilPath: {}", utilPath);

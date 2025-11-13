@@ -49,7 +49,7 @@ class ReactiveCodeGenTest {
     void testGenerateGrpcClientConfig_fromStub() throws Exception {
         var source = "/protobuf/grpc-java";
 
-        var injector = Guice.createInjector(new ReactiveCodeModule(project, source,"test-grpc" ,"com.example", "channelChannel", "/src/test/resources/protobuf/client", ""));
+        var injector = Guice.createInjector(new ReactiveCodeModule(project, source,"test-grpc" ,"com.example", "channelChannel", "/src/test/resources/protobuf/client", "", ""));
         var javaService = injector.getInstance(JavaService.class);
         var reactiveCode = injector.getInstance(ReactiveCodeService.class);
 

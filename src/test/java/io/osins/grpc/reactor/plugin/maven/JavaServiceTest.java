@@ -38,7 +38,7 @@ class JavaServiceTest {
     @Test
     void testLoadJavaCodes() throws Exception {
         var source = project.getBasedir()+"/src/test/resources/protobuf/grpc-java";
-        var module = Guice.createInjector(new ReactiveCodeModule(project, source, "test-grpc","com.example", "exampleChannel", "/src/test/resources/protobuf/client", ""));
+        var module = Guice.createInjector(new ReactiveCodeModule(project, source, "test-grpc","com.example", "exampleChannel", "/src/test/resources/protobuf/client", "", ""));
         var javaService = module.getInstance(JavaService.class);
 
         var launcher = javaService.loadJavaCodes(source);

@@ -1,7 +1,9 @@
 package io.osins.grpc.reactor.plugin.maven.service;
 
+import com.google.common.base.Strings;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+import com.google.inject.name.Named;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.maven.execution.MavenSession;
@@ -9,6 +11,8 @@ import org.apache.maven.project.MavenProject;
 import org.eclipse.aether.RepositorySystem;
 import org.eclipse.aether.artifact.DefaultArtifact;
 import org.eclipse.aether.resolution.ArtifactRequest;
+
+import java.util.Optional;
 
 @Slf4j
 @Singleton
@@ -21,8 +25,24 @@ public class ProtocPluginDownloader {
 
     private String cachedPath;
 
+    @Inject
+    @Named("resolve")
+    private String resolve;
+
     public synchronized String resolveProtocGenGrpcJava() {
-        return resolve("io.grpc", "protoc-gen-grpc-java", detectOsClassifier(), "exe", "1.74.0");
+        var arr = Optional.ofNullable(resolve)
+                .filter(s -> !Strings.isNullOrEmpty(s))
+                .map(s -> s.split(":"));
+
+        if(arr.isEmpty()){
+            throw new RuntimeException("resolve is required");
+        }
+
+        return resolve(arr.map(a->a[0]).orElse("io.grpc"),
+                arr.map(a->a[1]).orElse("protoc-gen-grpc-java"),
+                arr.map(a->a[2]).orElseGet(this::detectOsClassifier),
+                arr.map(a->a[3]).orElse("exe"),
+                arr.map(a->a[4]).orElse("1.76.0"));
     }
 
     public synchronized String resolve(String groupId, String artifactId, String classifier, String extension, String version) {
@@ -76,6 +96,7 @@ public class ProtocPluginDownloader {
             if (classifier.startsWith("linux")) classifier = "linux-aarch_64";
             if (classifier.startsWith("osx")) classifier = "osx-aarch_64";
         }
+
         return classifier;
     }
 }
