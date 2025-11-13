@@ -68,11 +68,11 @@ public class JavaServiceImpl implements JavaService {
                 Stream.concat(allArtifacts, protobufArtifacts),
                 Stream.of(grpcJavaPath, javaPath, utilPath, outClient))
                 .distinct() // 去重
-                .collect(Collectors.toList());
+                .toList();
 
         var launcher = new Launcher();
         var env = launcher.getEnvironment();
-        env.setNoClasspath(false); // 避免类路径冲突
+        env.setNoClasspath(true); // 避免类路径冲突
         // 设置源码兼容级别，如果项目属性中没有则默认为21
         String sourceVersion = project.getProperties().getProperty("maven.compiler.source");
         int complianceLevel = 21; // 默认为21
