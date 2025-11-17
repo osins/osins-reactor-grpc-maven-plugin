@@ -87,7 +87,7 @@ public class ProtoGenTest {
 
         // 创建 Guice Injector
         var threads = Math.max(2, Runtime.getRuntime().availableProcessors() - 1);
-        var injector = Guice.createInjector(new ProtoModule(threads, project, session, reposSession, repositorySystem));
+        var injector = Guice.createInjector(new ProtoModule(threads, project, session, reposSession, repositorySystem, ""));
 
         // 注入 ProtoService
         var protoService = injector.getInstance(ProtoService.class);

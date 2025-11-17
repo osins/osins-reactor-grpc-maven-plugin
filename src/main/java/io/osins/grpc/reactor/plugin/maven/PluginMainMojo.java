@@ -90,8 +90,8 @@ public class PluginMainMojo extends AbstractMojo {
         var protoInjector = Guice.createInjector(
                 new ProtoModule(threads,
                         project,
-                        session, repoSession, repoSystem));
-        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient, utilPath, resolve));
+                        session, repoSession, repoSystem, resolve));
+        var reactiveCodeInjector = Guice.createInjector(new ReactiveCodeModule(project, outProtobuf, serviceName, packageName, channelName, outClient, utilPath));
 
         log.info("Starting gRPC Spring Bean generation...");
         log.info("utilPath: {}", utilPath);

@@ -48,7 +48,7 @@ public class ProtocPluginDownloader {
     public synchronized String resolve(String groupId, String artifactId, String classifier, String extension, String version) {
         if (cachedPath != null) return cachedPath;
 
-        log.info("Resolving protoc-gen-grpc-java version 1.74.0");
+        log.info("Resolving {}:{}:{}:{}:{}", groupId, artifactId, classifier, extension, version);
 
         var artifact = new DefaultArtifact(groupId, artifactId, classifier, extension, version);
         var request = new ArtifactRequest();

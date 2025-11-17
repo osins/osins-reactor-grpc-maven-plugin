@@ -37,7 +37,7 @@
     <dependencies>
 
         <dependency>
-            <groupId>club.hm.matrix</groupId>
+            <groupId>io.osins.matrix</groupId>
             <artifactId>matrix-shared-grpc-base</artifactId>
             <version>0.0.1</version>
         </dependency>
