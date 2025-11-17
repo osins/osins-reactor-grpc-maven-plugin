@@ -105,7 +105,7 @@ public class ReactiveCodeServiceImpl implements ReactiveCodeService {
                     param.setSimpleName(channel);
                     param.setType(paramType);
 
-                    var declaring = factory.Type().createReference("club.hm.matrix.shared.grpc.client.StubUtils");
+                    var declaring = factory.Type().createReference("io.osins.matrix.shared.grpc.client.StubUtils");
                     var monoRef = factory.Type().createReference(Mono.class);
                     var channelParam = createManagedChannelType(factory);
                     var supplierParam = factory.Type().createReference("java.util.function.Function");
@@ -202,7 +202,7 @@ public class ReactiveCodeServiceImpl implements ReactiveCodeService {
 //        var field = factory.Field().create(
 //                configClass,
 //                java.util.EnumSet.of(ModifierKind.PRIVATE, ModifierKind.FINAL),
-//                factory.Type().createReference("club.hm.matrix.shared.grpc.client.ReactiveGrpcServiceDiscovery"),
+//                factory.Type().createReference("io.osins.matrix.shared.grpc.client.ReactiveGrpcServiceDiscovery"),
 //                "reactiveGrpcServiceDiscovery",
 //                null
 //        );

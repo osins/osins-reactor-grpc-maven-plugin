@@ -49,7 +49,7 @@ public class SpoonTest {
 //        // 把方法加到类
 //        clazz.addMethod(method);
 
-        var grpcClass = factory.Class().get("club.hm.matrix.auth.grpc.UserAuthorityServiceGrpc");
+        var grpcClass = factory.Class().get("io.osins.matrix.auth.grpc.UserAuthorityServiceGrpc");
         var observer = ObserverToReactor.builder(factory, grpcClass, "com.example","/src/test/resources/protobuf/client").build();
 
         GrpcConfigCodeUtils.createBlock(factory, grpcClass, "channel");
